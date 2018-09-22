@@ -29,18 +29,11 @@ ipx::add_memory_map control_S_AXI [ipx::current_core]
 set_property slave_memory_map_ref control_S_AXI [ipx::get_bus_interfaces control_S_AXI -of_objects [ipx::current_core]]
 
 
-# user defined ,set clock mapping
-
-ipx::associate_bus_interfaces -busif packet_in_instream -clock clk_line [ipx::current_core]
-ipx::associate_bus_interfaces -busif packet_out_outstream -clock clk_line [ipx::current_core]
-ipx::associate_bus_interfaces -busif control_S_AXI -clock clk_control [ipx::current_core]
-
 set_property core_revision 2 [ipx::current_core]
 ipx::create_xgui_files [ipx::current_core]
 ipx::update_checksums [ipx::current_core]
 ipx::save_core [ipx::current_core]
 
-ipx::archive_core FiveTupleDemo.zip [ipx::current_core]
 set_property  ip_repo_paths  FiveTupleDemo_vivado/FiveTupleDemo/FiveTupleDemo.srcs/sources_1/imports/FiveTupleDemo [current_project]
 update_ip_catalog
 
