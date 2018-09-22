@@ -65,31 +65,31 @@ output [21:0] tuple_out_control_DATA ;
 input packet_in_TLAST ;
 input packet_in_TVALID ;
 output packet_in_TREADY ;
-input [255:0] packet_in_TDATA /* unused */ ;
-input [31:0] packet_in_TKEEP /* unused */ ;
+input [63:0] packet_in_TDATA /* unused */ ;
+input [7:0] packet_in_TKEEP /* unused */ ;
 output packet_out_SOF ;
 output packet_out_EOF ;
 output packet_out_VAL ;
 input packet_out_RDY ;
-output [255:0] packet_out_DAT ;
+output [63:0] packet_out_DAT ;
 output packet_out_ERR ;
-output [5:0] packet_out_CNT ;
+output [3:0] packet_out_CNT ;
 
 reg tuple_out_control_VALID ;
 wire [21:0] tuple_out_control_DATA ;
 wire packet_in_TREADY ;
-wire [255:0] packet_in_TDATA_i /* undriven */ ;
-wire [31:0] packet_in_TKEEP_i /* undriven */ ;
+wire [63:0] packet_in_TDATA_i /* undriven */ ;
+wire [7:0] packet_in_TKEEP_i /* undriven */ ;
 reg TLAST_1 ;
 reg TVALID_1 ;
-reg [255:0] TDATA_1 ;
-reg [31:0] TKEEP_1 ;
+reg [63:0] TDATA_1 ;
+reg [7:0] TKEEP_1 ;
 reg packet_out_SOF ;
 reg packet_out_EOF ;
 reg packet_out_VAL ;
-reg [255:0] packet_out_DAT ;
+reg [63:0] packet_out_DAT ;
 wire packet_out_ERR ;
-reg [5:0] packet_out_CNT ;
+reg [3:0] packet_out_CNT ;
 reg [2:0] state ;
 reg [2:0] nxt_state ;
 
@@ -205,7 +205,7 @@ always @( posedge clk_line ) begin
 	else  begin
 		packet_out_VAL <= TVALID_1 ;
 		packet_out_DAT <= TDATA_1 ;
-		packet_out_CNT <= { TKEEP_1[0], ( ~TKEEP_1[0] & ^{ TKEEP_1[16] } ), ( ~TKEEP_1[0] & ^{ TKEEP_1[16], ~TKEEP_1[8], ~TKEEP_1[24] } ), ( ~TKEEP_1[0] & ^{ TKEEP_1[16], ~TKEEP_1[8], ~TKEEP_1[24], TKEEP_1[4], TKEEP_1[20], TKEEP_1[12], TKEEP_1[28] } ), ( ~TKEEP_1[0] & ^{ TKEEP_1[16], ~TKEEP_1[8], ~TKEEP_1[24], TKEEP_1[4], TKEEP_1[20], TKEEP_1[12], TKEEP_1[28], ~TKEEP_1[2], ~TKEEP_1[18], ~TKEEP_1[10], ~TKEEP_1[26], ~TKEEP_1[6], ~TKEEP_1[22], ~TKEEP_1[14], ~TKEEP_1[30] } ), ( ~TKEEP_1[0] & ^{ TKEEP_1[16], ~TKEEP_1[8], ~TKEEP_1[24], TKEEP_1[4], TKEEP_1[20], TKEEP_1[12], TKEEP_1[28], ~TKEEP_1[2], ~TKEEP_1[18], ~TKEEP_1[10], ~TKEEP_1[26], ~TKEEP_1[6], ~TKEEP_1[22], ~TKEEP_1[14], ~TKEEP_1[30], TKEEP_1[1], TKEEP_1[17], TKEEP_1[9], TKEEP_1[25], TKEEP_1[5], TKEEP_1[21], TKEEP_1[13], TKEEP_1[29], TKEEP_1[3], TKEEP_1[19], TKEEP_1[11], TKEEP_1[27], TKEEP_1[7], TKEEP_1[23], TKEEP_1[15], TKEEP_1[31] } ) } ;
+		packet_out_CNT <= { TKEEP_1[0], ( ~TKEEP_1[0] & ^{ TKEEP_1[4] } ), ( ~TKEEP_1[0] & ^{ TKEEP_1[4], ~TKEEP_1[2], ~TKEEP_1[6] } ), ( ~TKEEP_1[0] & ^{ TKEEP_1[4], ~TKEEP_1[2], ~TKEEP_1[6], TKEEP_1[1], TKEEP_1[5], TKEEP_1[3], TKEEP_1[7] } ) } ;
 	end
 end
 
@@ -213,15 +213,15 @@ end
 
 genvar i;
 genvar j;
-for (i=0; i<32; i=i+1) 
+for (i=0; i<8; i=i+1) 
     for (j=0; j<8; j=j+1) 
-        assign packet_in_TDATA_i[i*8+j] = packet_in_TDATA[(32-i-1)*8+j]; 
-for (i=0; i<32; i=i+1) assign packet_in_TKEEP_i[i] = packet_in_TKEEP[31-i]; 
+        assign packet_in_TDATA_i[i*8+j] = packet_in_TDATA[(8-i-1)*8+j]; 
+for (i=0; i<8; i=i+1) assign packet_in_TKEEP_i[i] = packet_in_TKEEP[7-i]; 
 
 
 endmodule
 
 // machine-generated file - do NOT modify by hand !
-// File created on 2018/09/22 10:38:34
+// File created on 2018/09/22 15:51:11
 // by Barista HDL generation library, version TRUNK @ 1007984
 

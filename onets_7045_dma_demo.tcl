@@ -6,7 +6,7 @@
 ### 0. General settings
 ############################################################
 set proj_root [pwd]
-set proj_name "onets_7045_8x_ref_ofshw"
+set proj_name "onets_7045_dma_demo"
 set proj_part "xc7z045ffg676-2"
 
 set proj_bd   "onets_bd"
@@ -19,7 +19,8 @@ set proj_constr_dir  "$proj_root/$proj_name/constrs"
 set proj_iprepo_dir  "$proj_root/ip-repo"
 
 set ip_list [list \
-   "report"
+   "report" \
+   "sdnet_top" \
    ]
 
 set source_files [list \

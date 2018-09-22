@@ -36,9 +36,9 @@
 module FiveTupleDemo_tb;
 
 
+reg clk_lookup /* undriven */ ;
 reg clk_line /* undriven */ ;
 reg clk_control /* undriven */ ;
-reg clk_lookup /* undriven */ ;
 reg clk_line_rst /* undriven */ ;
 reg clk_lookup_rst /* undriven */ ;
 reg clk_control_rst /* undriven */ ;
@@ -53,8 +53,8 @@ reg [0:0] control_S_AXI_ARVALID /* undriven */ ;
 reg [0:0] control_S_AXI_RREADY /* undriven */ ;
 wire [0:0] packet_in_instream_TVALID ;
 wire [0:0] packet_in_instream_TREADY ;
-wire [255:0] packet_in_instream_TDATA ;
-wire [31:0] packet_in_instream_TKEEP ;
+wire [63:0] packet_in_instream_TDATA ;
+wire [7:0] packet_in_instream_TKEEP ;
 wire [0:0] packet_in_instream_TLAST ;
 wire [0:0] tuple_in_metadata_in_VALID ;
 wire [127:0] tuple_in_metadata_in_DATA ;
@@ -69,8 +69,8 @@ wire [0:0] control_S_AXI_RVALID /* unused */ ;
 wire [0:0] enable_processing ;
 wire [0:0] packet_out_outstream_TVALID ;
 wire [0:0] packet_out_outstream_TREADY ;
-wire [255:0] packet_out_outstream_TDATA ;
-wire [31:0] packet_out_outstream_TKEEP ;
+wire [63:0] packet_out_outstream_TDATA ;
+wire [7:0] packet_out_outstream_TKEEP ;
 wire [0:0] packet_out_outstream_TLAST ;
 wire [0:0] tuple_out_metadata_out_VALID ;
 wire [127:0] tuple_out_metadata_out_DATA ;
@@ -214,20 +214,20 @@ end
 
 
 always begin 
-  #(8000 / 2) clk_line =  0; 
-  #(8000 / 2) clk_line =  1; 
+  #(12999 / 2) clk_lookup =  0; 
+  #(12999 / 2) clk_lookup =  1; 
+end
+
+
+always begin 
+  #(6400 / 2) clk_line =  0; 
+  #(6400 / 2) clk_line =  1; 
 end
 
 
 always begin 
   #(12999 / 2) clk_control =  0; 
   #(12999 / 2) clk_control =  1; 
-end
-
-
-always begin 
-  #(12999 / 2) clk_lookup =  0; 
-  #(12999 / 2) clk_lookup =  1; 
 end
 
 
@@ -431,7 +431,7 @@ import "DPI-C" context function void FiveTupleDemo_DPI(
 initial begin
     if ($value$plusargs("PKT=%s", packet_file)) begin end
     if ($value$plusargs("TUP=%s",  tuple_file)) begin end
-    FiveTupleDemo_DPI(packet_file, 0, tuple_file, 1, 256, 1);
+    FiveTupleDemo_DPI(packet_file, 0, tuple_file, 1, 64, 1);
     fw_done = 0;
     stim_file = 1;
     check_file = 1;
@@ -449,6 +449,6 @@ end
 endmodule
 
 // machine-generated file - do NOT modify by hand !
-// File created on 2018/09/22 10:38:34
+// File created on 2018/09/22 15:51:11
 // by Barista HDL generation library, version TRUNK @ 1007984
 

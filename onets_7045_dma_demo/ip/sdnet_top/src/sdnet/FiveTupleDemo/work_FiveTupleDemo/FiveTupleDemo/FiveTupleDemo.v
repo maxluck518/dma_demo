@@ -79,8 +79,8 @@ module FiveTupleDemo (
 
 input [0:0] packet_in_instream_TVALID ;
 output [0:0] packet_in_instream_TREADY ;
-input [255:0] packet_in_instream_TDATA ;
-input [31:0] packet_in_instream_TKEEP ;
+input [63:0] packet_in_instream_TDATA ;
+input [7:0] packet_in_instream_TKEEP ;
 input [0:0] packet_in_instream_TLAST ;
 input [0:0] tuple_in_metadata_in_VALID ;
 input [127:0] tuple_in_metadata_in_DATA ;
@@ -104,8 +104,8 @@ input [0:0] control_S_AXI_RREADY ;
 input [0:0] enable_processing ;
 output [0:0] packet_out_outstream_TVALID ;
 input [0:0] packet_out_outstream_TREADY ;
-output [255:0] packet_out_outstream_TDATA ;
-output [31:0] packet_out_outstream_TKEEP ;
+output [63:0] packet_out_outstream_TDATA ;
+output [7:0] packet_out_outstream_TKEEP ;
 output [0:0] packet_out_outstream_TLAST ;
 output [0:0] tuple_out_metadata_out_VALID ;
 output [127:0] tuple_out_metadata_out_DATA ;
@@ -129,8 +129,8 @@ wire [31:0] control_S_AXI_RDATA ;
 wire [1:0] control_S_AXI_RRESP ;
 wire [0:0] control_S_AXI_RVALID ;
 wire [0:0] packet_out_outstream_TVALID ;
-wire [255:0] packet_out_outstream_TDATA ;
-wire [31:0] packet_out_outstream_TKEEP ;
+wire [63:0] packet_out_outstream_TDATA ;
+wire [7:0] packet_out_outstream_TKEEP ;
 wire [0:0] packet_out_outstream_TLAST ;
 wire [0:0] tuple_out_metadata_out_VALID ;
 wire [127:0] tuple_out_metadata_out_DATA ;
@@ -142,8 +142,8 @@ wire [0:0] S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_S_PROTOC
 wire [0:0] S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_EOF ;
 wire [0:0] S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_VAL ;
 wire [0:0] S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_RDY /* unused */ ;
-wire [255:0] S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_DAT ;
-wire [5:0] S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_CNT ;
+wire [63:0] S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_DAT ;
+wire [3:0] S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_CNT ;
 wire [0:0] S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_S_PROTOCOL_ADAPTER_INGRESS__packet_out_____parser__packet_in_ERR ;
 wire [0:0] parser__tuple_out_fields_____S_BRIDGER_for_lookup_tuple_in_request__tuple_in_VALID ;
 wire [103:0] parser__tuple_out_fields_____S_BRIDGER_for_lookup_tuple_in_request__tuple_in_DATA ;
@@ -155,15 +155,15 @@ wire [0:0] parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_parser__p
 wire [0:0] parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_EOF ;
 wire [0:0] parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_VAL ;
 wire [0:0] parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_RDY ;
-wire [255:0] parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_DAT ;
-wire [5:0] parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_CNT ;
+wire [63:0] parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_DAT ;
+wire [3:0] parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_CNT ;
 wire [0:0] parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_parser__packet_out_____S_PROTOCOL_ADAPTER_EGRESS__packet_in_ERR ;
 wire [0:0] lookup__tuple_out_response_____S_SYNCER_for__OUT___tuple_in_TUPLE0_VALID ;
 wire [15:0] lookup__tuple_out_response_____S_SYNCER_for__OUT___tuple_in_TUPLE0_DATA ;
 wire [0:0] S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_TVALID ;
 wire [0:0] S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_TREADY ;
-wire [255:0] S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_TDATA ;
-wire [31:0] S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_TKEEP ;
+wire [63:0] S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_TDATA ;
+wire [7:0] S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_TKEEP ;
 wire [0:0] S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_S_PROTOCOL_ADAPTER_EGRESS__packet_out_____S_SYNCER_for__OUT___packet_in_PACKET1_TLAST ;
 wire [7:0] S_CONTROL_FiveTupleDemo__lookup_control_____lookup__control_S_AXI_AWADDR ;
 wire [0:0] S_CONTROL_FiveTupleDemo__lookup_control_____lookup__control_S_AXI_AWVALID ;
@@ -303,8 +303,8 @@ lookup
 	.control_S_AXI_RRESP 	( S_CONTROL_FiveTupleDemo__lookup_control_____lookup__control_S_AXI_RRESP ),
 	.control_S_AXI_RVALID	( S_CONTROL_FiveTupleDemo__lookup_control_____lookup__control_S_AXI_RVALID ),
 	.control_S_AXI_RREADY	( S_CONTROL_FiveTupleDemo__lookup_control_____lookup__control_S_AXI_RREADY ),
-	.clk_control         	( clk_control ),
 	.clk_lookup          	( clk_lookup ),
+	.clk_control         	( clk_control ),
 	.clk_lookup_rst_high 	( clk_lookup_rst_high ),
 	.clk_control_rst_low 	( clk_control_rst_low )
 );
@@ -340,8 +340,8 @@ S_BRIDGER_for_lookup_tuple_in_request
 	.tuple_in_DATA       	( parser__tuple_out_fields_____S_BRIDGER_for_lookup_tuple_in_request__tuple_in_DATA ),
 	.tuple_out_VALID     	( S_BRIDGER_for_lookup_tuple_in_request__tuple_out_____lookup__tuple_in_request_VALID ),
 	.tuple_out_DATA      	( S_BRIDGER_for_lookup_tuple_in_request__tuple_out_____lookup__tuple_in_request_DATA ),
-	.clk_line            	( clk_line ),
 	.clk_lookup          	( clk_lookup ),
+	.clk_line            	( clk_line ),
 	.clk_line_rst_high   	( clk_line_rst_high ),
 	.clk_lookup_rst_high 	( clk_lookup_rst_high )
 );
@@ -453,6 +453,6 @@ S_CONTROL_FiveTupleDemo
 endmodule
 
 // machine-generated file - do NOT modify by hand !
-// File created on 2018/09/22 10:38:34
+// File created on 2018/09/22 15:51:11
 // by Barista HDL generation library, version TRUNK @ 1007984
 

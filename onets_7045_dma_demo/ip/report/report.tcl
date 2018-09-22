@@ -1,6 +1,6 @@
 set ip_proj_root [pwd]
 set ip_proj_name "report"
-# set ip_proj_part "xc7z045ffg676-2"
+set ip_proj_part "xc7z045ffg676-2"
 
 create_project $ip_proj_name $ip_proj_root -part $ip_proj_part -force
 

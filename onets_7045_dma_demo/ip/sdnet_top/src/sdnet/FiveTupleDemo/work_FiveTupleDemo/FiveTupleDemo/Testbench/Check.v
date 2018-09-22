@@ -62,8 +62,8 @@ output packet_out_avail ;
 input packet_out_tready ;
 input packet_out_tvalid ;
 input packet_out_tlast ;
-input [31:0] packet_out_tkeep ;
-input [255:0] packet_out_tdata ;
+input [7:0] packet_out_tkeep ;
+input [63:0] packet_out_tdata ;
 
 reg [31:0] fd_pkt ;
 reg [31:0] fd_tup ;
@@ -77,9 +77,9 @@ reg [127:0] tuple_exp_tuple_out_metadata_out ;
 reg [15:0] tuple_exp_tuple_out_counter_index_out ;
 wire packet_out_avail ;
 reg packet_exp_tlast ;
-reg [31:0] packet_exp_tkeep ;
-reg [255:0] packet_exp_tdata ;
-reg [255:0] packet_out_mask ;
+reg [7:0] packet_exp_tkeep ;
+reg [63:0] packet_exp_tdata ;
+reg [63:0] packet_out_mask ;
 
 always @( posedge file_done ) begin
 	fd_pkt <= $fopen("Packet_expect.axi", "r") ;
@@ -134,30 +134,6 @@ always @* begin
 	packet_out_mask[47:40] = ( packet_out_tlast ? { 8{packet_out_tkeep[5]} } : 8'd255 ) ;
 	packet_out_mask[55:48] = ( packet_out_tlast ? { 8{packet_out_tkeep[6]} } : 8'd255 ) ;
 	packet_out_mask[63:56] = ( packet_out_tlast ? { 8{packet_out_tkeep[7]} } : 8'd255 ) ;
-	packet_out_mask[71:64] = ( packet_out_tlast ? { 8{packet_out_tkeep[8]} } : 8'd255 ) ;
-	packet_out_mask[79:72] = ( packet_out_tlast ? { 8{packet_out_tkeep[9]} } : 8'd255 ) ;
-	packet_out_mask[87:80] = ( packet_out_tlast ? { 8{packet_out_tkeep[10]} } : 8'd255 ) ;
-	packet_out_mask[95:88] = ( packet_out_tlast ? { 8{packet_out_tkeep[11]} } : 8'd255 ) ;
-	packet_out_mask[103:96] = ( packet_out_tlast ? { 8{packet_out_tkeep[12]} } : 8'd255 ) ;
-	packet_out_mask[111:104] = ( packet_out_tlast ? { 8{packet_out_tkeep[13]} } : 8'd255 ) ;
-	packet_out_mask[119:112] = ( packet_out_tlast ? { 8{packet_out_tkeep[14]} } : 8'd255 ) ;
-	packet_out_mask[127:120] = ( packet_out_tlast ? { 8{packet_out_tkeep[15]} } : 8'd255 ) ;
-	packet_out_mask[135:128] = ( packet_out_tlast ? { 8{packet_out_tkeep[16]} } : 8'd255 ) ;
-	packet_out_mask[143:136] = ( packet_out_tlast ? { 8{packet_out_tkeep[17]} } : 8'd255 ) ;
-	packet_out_mask[151:144] = ( packet_out_tlast ? { 8{packet_out_tkeep[18]} } : 8'd255 ) ;
-	packet_out_mask[159:152] = ( packet_out_tlast ? { 8{packet_out_tkeep[19]} } : 8'd255 ) ;
-	packet_out_mask[167:160] = ( packet_out_tlast ? { 8{packet_out_tkeep[20]} } : 8'd255 ) ;
-	packet_out_mask[175:168] = ( packet_out_tlast ? { 8{packet_out_tkeep[21]} } : 8'd255 ) ;
-	packet_out_mask[183:176] = ( packet_out_tlast ? { 8{packet_out_tkeep[22]} } : 8'd255 ) ;
-	packet_out_mask[191:184] = ( packet_out_tlast ? { 8{packet_out_tkeep[23]} } : 8'd255 ) ;
-	packet_out_mask[199:192] = ( packet_out_tlast ? { 8{packet_out_tkeep[24]} } : 8'd255 ) ;
-	packet_out_mask[207:200] = ( packet_out_tlast ? { 8{packet_out_tkeep[25]} } : 8'd255 ) ;
-	packet_out_mask[215:208] = ( packet_out_tlast ? { 8{packet_out_tkeep[26]} } : 8'd255 ) ;
-	packet_out_mask[223:216] = ( packet_out_tlast ? { 8{packet_out_tkeep[27]} } : 8'd255 ) ;
-	packet_out_mask[231:224] = ( packet_out_tlast ? { 8{packet_out_tkeep[28]} } : 8'd255 ) ;
-	packet_out_mask[239:232] = ( packet_out_tlast ? { 8{packet_out_tkeep[29]} } : 8'd255 ) ;
-	packet_out_mask[247:240] = ( packet_out_tlast ? { 8{packet_out_tkeep[30]} } : 8'd255 ) ;
-	packet_out_mask[255:248] = ( packet_out_tlast ? { 8{packet_out_tkeep[31]} } : 8'd255 ) ;
 end
 
 assign ready = packet_out_tready ;
@@ -200,6 +176,6 @@ end
 endmodule
 
 // machine-generated file - do NOT modify by hand !
-// File created on 2018/09/22 10:38:34
+// File created on 2018/09/22 15:51:11
 // by Barista HDL generation library, version TRUNK @ 1007984
 

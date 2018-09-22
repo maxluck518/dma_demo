@@ -58,8 +58,8 @@ output [127:0] tuple_in_metadata_in ;
 input packet_in_instream_TREADY ;
 output packet_in_instream_TVALID ;
 output packet_in_instream_TLAST ;
-output [31:0] packet_in_instream_TKEEP ;
-output [255:0] packet_in_instream_TDATA ;
+output [7:0] packet_in_instream_TKEEP ;
+output [63:0] packet_in_instream_TDATA ;
 
 reg [31:0] fd_tup ;
 reg [31:0] fd_pkt ;
@@ -68,8 +68,8 @@ reg tuple_in_valid ;
 reg [127:0] tuple_in_metadata_in ;
 reg packet_in_instream_TVALID ;
 reg packet_in_instream_TLAST ;
-reg [31:0] packet_in_instream_TKEEP ;
-reg [255:0] packet_in_instream_TDATA ;
+reg [7:0] packet_in_instream_TKEEP ;
+reg [63:0] packet_in_instream_TDATA ;
 reg SOP ;
 
 always @( posedge file_done ) begin
@@ -117,6 +117,6 @@ end
 endmodule
 
 // machine-generated file - do NOT modify by hand !
-// File created on 2018/09/22 10:38:34
+// File created on 2018/09/22 15:51:11
 // by Barista HDL generation library, version TRUNK @ 1007984
 

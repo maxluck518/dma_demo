@@ -30,7 +30,7 @@
 
 //----------------------------------------------------------------------------
 // File name: S_RESETTER_lookup.v
-// File created: 2018/09/22 10:38:34
+// File created: 2018/09/22 15:51:11
 // Created by: Xilinx SDNet Compiler version 2018.1.1, build 2258648
 
 //----------------------------------------------------------------------------
@@ -63,136 +63,136 @@ module S_RESETTER_lookup (
 
 
 
- reg	srketi0zp08ci522v05q74mv_703;	 initial srketi0zp08ci522v05q74mv_703 = 1'b0 ;
- reg	l980p0udagzf6j93dzbrs9nt_542;	 initial l980p0udagzf6j93dzbrs9nt_542 = 1'b0 ;
- reg [4:0] wx1pxt0btpq5et9tpgvl8qo96_346;	 initial wx1pxt0btpq5et9tpgvl8qo96_346 = 5'b00000 ;
- reg [10:0] bct62rufgkm6jwqtj9x7mwkh7z4guz8w_724;	 initial bct62rufgkm6jwqtj9x7mwkh7z4guz8w_724 = 11'b00000000000 ;
- wire	zha4u4pk2gzm27wt7_892 ;
- reg	izl7ivgq4czqzorm_736;	 initial izl7ivgq4czqzorm_736 = 1'b1 ;
- reg	esvbc9tp62j55l4rx6pntpr5ls7_722;	 initial esvbc9tp62j55l4rx6pntpr5ls7_722 = 1'b0 ;
- reg	grmf6ndzgkuqh4yudvj7estf8p_584;	 initial grmf6ndzgkuqh4yudvj7estf8p_584 = 1'b1 ;
- reg	q94tjvjnwxyes4l1e8ehc7r7eu83aia_534;	 initial q94tjvjnwxyes4l1e8ehc7r7eu83aia_534 = 1'b0 ;
- wire [4:0] pra7szrata3pgm7r_29 ;
- wire [10:0] oeqsfwt6xwkw1p126lmxt3qo4gou13_717 ;
- wire	lkth0lyiqi95albhw8f2cnyacd_223 ;
- wire	r8rmohs6tzapsuo48h2_817 ;
- wire	g865w061fnyrnlmsl3qfme846b_882 ;
- wire	cfeitls1uq7yq7hmtoaygqv_300 ;
- wire	mpw315d0jgg0w9lnclghaunr7tau_21 ;
- wire	h3f3rqtpkhdqfsxeo2536tiob0u0o_4 ;
- wire	w6pgkw6lhkldu1tyv_451 ;
- wire	z77eehvsvd2qz5n0thntfrpr_560 ;
- wire	c04c4qqa4gnh38asegnv640p3jgd0c_245 ;
- wire	kyxbjors2xq592nfyz6_93 ;
- wire	rlykscoshafbpserf_604 ;
- wire	z7twqc1k5ru54g1qpeoxve8h02ipa4g_64 ;
+ reg	qn3rosos11nzir713m081c250mo_339;	 initial qn3rosos11nzir713m081c250mo_339 = 1'b0 ;
+ reg	wacjnxoftelgdu2aw_688;	 initial wacjnxoftelgdu2aw_688 = 1'b0 ;
+ reg [4:0] olcmzg836o6fwddldi_212;	 initial olcmzg836o6fwddldi_212 = 5'b00000 ;
+ reg [10:0] r52auqddq5mkp7d4_595;	 initial r52auqddq5mkp7d4_595 = 11'b00000000000 ;
+ wire	c3fnbo39b2uqevfjbvpi9euwyh51o_354 ;
+ reg	yu94ef7frqadm60eob9g2_34;	 initial yu94ef7frqadm60eob9g2_34 = 1'b1 ;
+ reg	zog1pou0463cgnsuk384mw9ssax90ys_82;	 initial zog1pou0463cgnsuk384mw9ssax90ys_82 = 1'b0 ;
+ reg	scia5diqkmx6zq7q7itj53_182;	 initial scia5diqkmx6zq7q7itj53_182 = 1'b1 ;
+ reg	kxaw6oer3kj67awo57lidq2ekler_383;	 initial kxaw6oer3kj67awo57lidq2ekler_383 = 1'b0 ;
+ wire [4:0] ymovhgag5vn00tkct86h629hd3ijo_208 ;
+ wire [10:0] z7qycmjeuacexcbgtlbpz4gzclbp1i_903 ;
+ wire	g88iwddz7lqmmyedv857y_327 ;
+ wire	sh1juasajzwrwanxjhsbhei834_805 ;
+ wire	sxqu9l1xil05wn7bhnizuz_16 ;
+ wire	ydfre8dwt8a84slqlse7ci7k3m96w_702 ;
+ wire	u6sgvem1a4ki8u3b79er8zzjkt8a84h8_562 ;
+ wire	hi28rpjtqpkr9ob1y9dgjuu_71 ;
+ wire	gu1goq82ziv6pklativw298bl57_313 ;
+ wire	umklbk26s1t88yopl_417 ;
+ wire	cco4rgt10czdnxnhfp0dmie_709 ;
+ wire	erly3wolyk005b44ujej75ohzixy_252 ;
+ wire	e4hyq74qs8kobbpy1zqwu474hy32sgj_830 ;
+ wire	nfzaazbn6zzyk67qp5auuh1a9w_454 ;
 
 
- assign pra7szrata3pgm7r_29 = 
-	wx1pxt0btpq5et9tpgvl8qo96_346 + 1 ;
- assign oeqsfwt6xwkw1p126lmxt3qo4gou13_717 = 
-	bct62rufgkm6jwqtj9x7mwkh7z4guz8w_724 + 1 ;
- assign lkth0lyiqi95albhw8f2cnyacd_223 = (
-	((wx1pxt0btpq5et9tpgvl8qo96_346 > 5'b00000))?1'b1:
+ assign ymovhgag5vn00tkct86h629hd3ijo_208 = 
+	olcmzg836o6fwddldi_212 + 1 ;
+ assign z7qycmjeuacexcbgtlbpz4gzclbp1i_903 = 
+	r52auqddq5mkp7d4_595 + 1 ;
+ assign g88iwddz7lqmmyedv857y_327 = (
+	((olcmzg836o6fwddldi_212 > 5'b00000))?1'b1:
 	0)  ;
- assign r8rmohs6tzapsuo48h2_817 = 
-	rst | l980p0udagzf6j93dzbrs9nt_542 ;
- assign g865w061fnyrnlmsl3qfme846b_882 = 
-	r8rmohs6tzapsuo48h2_817 | lkth0lyiqi95albhw8f2cnyacd_223 ;
- assign cfeitls1uq7yq7hmtoaygqv_300 = (
-	((l980p0udagzf6j93dzbrs9nt_542 == 1'b1) && (z7twqc1k5ru54g1qpeoxve8h02ipa4g_64 == 1'b1) && (wx1pxt0btpq5et9tpgvl8qo96_346 == 5'b00000))?1'b1:
-	((wx1pxt0btpq5et9tpgvl8qo96_346 != 5'b00000) && (l980p0udagzf6j93dzbrs9nt_542 != 1'b1))?1'b1:
+ assign sh1juasajzwrwanxjhsbhei834_805 = 
+	rst | wacjnxoftelgdu2aw_688 ;
+ assign sxqu9l1xil05wn7bhnizuz_16 = 
+	sh1juasajzwrwanxjhsbhei834_805 | g88iwddz7lqmmyedv857y_327 ;
+ assign ydfre8dwt8a84slqlse7ci7k3m96w_702 = (
+	((wacjnxoftelgdu2aw_688 == 1'b1) && (nfzaazbn6zzyk67qp5auuh1a9w_454 == 1'b1) && (olcmzg836o6fwddldi_212 == 5'b00000))?1'b1:
+	((olcmzg836o6fwddldi_212 != 5'b00000) && (wacjnxoftelgdu2aw_688 != 1'b1))?1'b1:
 	0)  ;
- assign mpw315d0jgg0w9lnclghaunr7tau_21 = (
-	((srketi0zp08ci522v05q74mv_703 == 1'b1))?1'b1:
+ assign u6sgvem1a4ki8u3b79er8zzjkt8a84h8_562 = (
+	((qn3rosos11nzir713m081c250mo_339 == 1'b1))?1'b1:
 	0)  ;
- assign h3f3rqtpkhdqfsxeo2536tiob0u0o_4 = (
-	((wx1pxt0btpq5et9tpgvl8qo96_346 == 5'b01111) && (l980p0udagzf6j93dzbrs9nt_542 != 1'b1) && (z7twqc1k5ru54g1qpeoxve8h02ipa4g_64 == 1'b1))?1'b1:
-	((bct62rufgkm6jwqtj9x7mwkh7z4guz8w_724 != 11'b00000000000) && (bct62rufgkm6jwqtj9x7mwkh7z4guz8w_724 != 11'b10001001110) && (l980p0udagzf6j93dzbrs9nt_542 != 1'b1) && (z7twqc1k5ru54g1qpeoxve8h02ipa4g_64 == 1'b1))?1'b1:
+ assign hi28rpjtqpkr9ob1y9dgjuu_71 = (
+	((olcmzg836o6fwddldi_212 == 5'b01111) && (wacjnxoftelgdu2aw_688 != 1'b1) && (nfzaazbn6zzyk67qp5auuh1a9w_454 == 1'b1))?1'b1:
+	((r52auqddq5mkp7d4_595 != 11'b00000000000) && (r52auqddq5mkp7d4_595 != 11'b10001001110) && (wacjnxoftelgdu2aw_688 != 1'b1) && (nfzaazbn6zzyk67qp5auuh1a9w_454 == 1'b1))?1'b1:
 	0)  ;
- assign w6pgkw6lhkldu1tyv_451 = (
-	((bct62rufgkm6jwqtj9x7mwkh7z4guz8w_724 == 11'b10001001110))?1'b1:
+ assign gu1goq82ziv6pklativw298bl57_313 = (
+	((r52auqddq5mkp7d4_595 == 11'b10001001110))?1'b1:
 	0)  ;
- assign z77eehvsvd2qz5n0thntfrpr_560 = 
+ assign umklbk26s1t88yopl_417 = 
 	1'b1 ;
- assign c04c4qqa4gnh38asegnv640p3jgd0c_245 = 
+ assign cco4rgt10czdnxnhfp0dmie_709 = 
 	1'b0 ;
- assign kyxbjors2xq592nfyz6_93 = 
-	 ~(zha4u4pk2gzm27wt7_892) ;
- assign rlykscoshafbpserf_604 = (
-	((bct62rufgkm6jwqtj9x7mwkh7z4guz8w_724 == 11'b10001001110))?1'b1:
+ assign erly3wolyk005b44ujej75ohzixy_252 = 
+	 ~(c3fnbo39b2uqevfjbvpi9euwyh51o_354) ;
+ assign e4hyq74qs8kobbpy1zqwu474hy32sgj_830 = (
+	((r52auqddq5mkp7d4_595 == 11'b10001001110))?1'b1:
 	0)  ;
- assign z7twqc1k5ru54g1qpeoxve8h02ipa4g_64 = 
+ assign nfzaazbn6zzyk67qp5auuh1a9w_454 = 
 	1'b1 ;
- assign reset_out_active_high 	= grmf6ndzgkuqh4yudvj7estf8p_584 ;
- assign reset_out_active_low 	= q94tjvjnwxyes4l1e8ehc7r7eu83aia_534 ;
+ assign reset_out_active_high 	= scia5diqkmx6zq7q7itj53_182 ;
+ assign reset_out_active_low 	= kxaw6oer3kj67awo57lidq2ekler_383 ;
 
 
-assign zha4u4pk2gzm27wt7_892 = (
-	((g865w061fnyrnlmsl3qfme846b_882 == 1'b1) && (wx1pxt0btpq5et9tpgvl8qo96_346 < 5'b10000))?z77eehvsvd2qz5n0thntfrpr_560 :
+assign c3fnbo39b2uqevfjbvpi9euwyh51o_354 = (
+	((sxqu9l1xil05wn7bhnizuz_16 == 1'b1) && (olcmzg836o6fwddldi_212 < 5'b10000))?umklbk26s1t88yopl_417 :
 1'b0) ;
 
 
 
 always @(posedge clk)
 begin
-		srketi0zp08ci522v05q74mv_703 <= rst ;
-		l980p0udagzf6j93dzbrs9nt_542 <= srketi0zp08ci522v05q74mv_703 ;
-	if (mpw315d0jgg0w9lnclghaunr7tau_21) 
+		qn3rosos11nzir713m081c250mo_339 <= rst ;
+		wacjnxoftelgdu2aw_688 <= qn3rosos11nzir713m081c250mo_339 ;
+	if (u6sgvem1a4ki8u3b79er8zzjkt8a84h8_562) 
 	begin 
-	  wx1pxt0btpq5et9tpgvl8qo96_346 <= 5'b00000 ;
+	  olcmzg836o6fwddldi_212 <= 5'b00000 ;
 	 end 
 	else 
 	begin 
-		if (cfeitls1uq7yq7hmtoaygqv_300) 
+		if (ydfre8dwt8a84slqlse7ci7k3m96w_702) 
 		begin 
-			wx1pxt0btpq5et9tpgvl8qo96_346 <= pra7szrata3pgm7r_29 ;
+			olcmzg836o6fwddldi_212 <= ymovhgag5vn00tkct86h629hd3ijo_208 ;
 		end 
 	end 
-	if (mpw315d0jgg0w9lnclghaunr7tau_21) 
+	if (u6sgvem1a4ki8u3b79er8zzjkt8a84h8_562) 
 	begin 
-	  bct62rufgkm6jwqtj9x7mwkh7z4guz8w_724 <= 11'b00000000000 ;
+	  r52auqddq5mkp7d4_595 <= 11'b00000000000 ;
 	 end 
 	else 
 	begin 
-		if (h3f3rqtpkhdqfsxeo2536tiob0u0o_4) 
+		if (hi28rpjtqpkr9ob1y9dgjuu_71) 
 		begin 
-			bct62rufgkm6jwqtj9x7mwkh7z4guz8w_724 <= oeqsfwt6xwkw1p126lmxt3qo4gou13_717 ;
+			r52auqddq5mkp7d4_595 <= z7qycmjeuacexcbgtlbpz4gzclbp1i_903 ;
 		end 
 	end 
 	if (rst) 
 	begin 
-	  izl7ivgq4czqzorm_736 <= 1'b1 ;
+	  yu94ef7frqadm60eob9g2_34 <= 1'b1 ;
 	 end 
 	else 
 	begin 
-			izl7ivgq4czqzorm_736 <= zha4u4pk2gzm27wt7_892 ;
+			yu94ef7frqadm60eob9g2_34 <= c3fnbo39b2uqevfjbvpi9euwyh51o_354 ;
 	end 
 	if (rst) 
 	begin 
-	  esvbc9tp62j55l4rx6pntpr5ls7_722 <= 1'b0 ;
+	  zog1pou0463cgnsuk384mw9ssax90ys_82 <= 1'b0 ;
 	 end 
 	else 
 	begin 
-			esvbc9tp62j55l4rx6pntpr5ls7_722 <= kyxbjors2xq592nfyz6_93 ;
+			zog1pou0463cgnsuk384mw9ssax90ys_82 <= erly3wolyk005b44ujej75ohzixy_252 ;
 	end 
 	if (rst) 
 	begin 
-	  grmf6ndzgkuqh4yudvj7estf8p_584 <= 1'b1 ;
+	  scia5diqkmx6zq7q7itj53_182 <= 1'b1 ;
 	 end 
 	else 
 	begin 
-			grmf6ndzgkuqh4yudvj7estf8p_584 <= izl7ivgq4czqzorm_736 ;
+			scia5diqkmx6zq7q7itj53_182 <= yu94ef7frqadm60eob9g2_34 ;
 	end 
 	if (rst) 
 	begin 
-	  q94tjvjnwxyes4l1e8ehc7r7eu83aia_534 <= 1'b0 ;
+	  kxaw6oer3kj67awo57lidq2ekler_383 <= 1'b0 ;
 	 end 
 	else 
 	begin 
-			q94tjvjnwxyes4l1e8ehc7r7eu83aia_534 <= esvbc9tp62j55l4rx6pntpr5ls7_722 ;
+			kxaw6oer3kj67awo57lidq2ekler_383 <= zog1pou0463cgnsuk384mw9ssax90ys_82 ;
 	end 
-		init_done <= rlykscoshafbpserf_604 ;
+		init_done <= e4hyq74qs8kobbpy1zqwu474hy32sgj_830 ;
 end
 
 endmodule 

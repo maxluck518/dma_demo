@@ -49,54 +49,49 @@ module report
     input                                           s_axi_rready,
 
     // AXI Stream Ports
-    output  [C_M_AXIS_DATA_WIDTH-1:0]               m_axis_tdata,
-    output  [((C_M_AXIS_DATA_WIDTH/8))-1:0]         m_axis_tstrb,
-    output                                          m_axis_tvalid,
-    input                                           m_axis_tready,
-    output                                          m_axis_tlast
+    (*MARK_DEBUG="true"*)output  [C_M_AXIS_DATA_WIDTH-1:0]               m_axis_tdata,
+    (*MARK_DEBUG="true"*)output  [((C_M_AXIS_DATA_WIDTH/8))-1:0]         m_axis_tstrb,
+    (*MARK_DEBUG="true"*)output                                          m_axis_tvalid,
+    (*MARK_DEBUG="true"*)input                                           m_axis_tready,
+    (*MARK_DEBUG="true"*)output                                          m_axis_tlast
 );
     
     wire                                            sw_report_en;
     // FIFO Ports
-    wire                                            fifo_wr_en;
-    wire  [FIFO_DATA_WIDTH-1:0]                     fifo_din;
-    wire                                            fifo_full;
-    wire                                            fifo_prog_full;		
-    wire                                            fifo_empty;
+    (*MARK_DEBUG="true"*)wire                                            fifo_wr_en;
+    (*MARK_DEBUG="true"*)wire  [FIFO_DATA_WIDTH-1:0]                     fifo_din;
+    (*MARK_DEBUG="true"*)wire                                            fifo_full;
+    (*MARK_DEBUG="true"*)wire                                            fifo_prog_full;		
+    (*MARK_DEBUG="true"*)wire                                            fifo_empty;
+    (*MARK_DEBUG="true"*)wire                                            reg_req;
+    (*MARK_DEBUG="true"*)wire                                            reg_rd_wr_L;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     reg_addr;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     reg_wr_data;
+    (*MARK_DEBUG="true"*)wire                                            reg_ack;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     reg_rd_data;
+    (*MARK_DEBUG="true"*)wire                                            udp_reg_req;
+    (*MARK_DEBUG="true"*)wire                                            udp_reg_rd_wr_L;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     udp_reg_addr;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     udp_reg_wr_data;
+    (*MARK_DEBUG="true"*)wire                                            udp_reg_ack;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     udp_reg_rd_data;
+    (*MARK_DEBUG="true"*)wire                                            ctrl_reg_req;
+    (*MARK_DEBUG="true"*)wire                                            ctrl_reg_rd_wr_L;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     ctrl_reg_addr;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     ctrl_reg_wr_data;
+    (*MARK_DEBUG="true"*)wire                                            ctrl_reg_ack;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     ctrl_reg_rd_data;
+    (*MARK_DEBUG="true"*)wire                                            report_reg_req;
+    (*MARK_DEBUG="true"*)wire                                            report_reg_rd_wr_L;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     report_reg_addr;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     report_reg_wr_data;
+    (*MARK_DEBUG="true"*)wire                                            report_reg_ack;
+    (*MARK_DEBUG="true"*)wire [31:0]                                     report_reg_rd_data;
 
-
-    wire                                            reg_req;
-    wire                                            reg_rd_wr_L;
-    wire [31:0]                                     reg_addr;
-    wire [31:0]                                     reg_wr_data;
-    wire                                            reg_ack;
-    wire [31:0]                                     reg_rd_data;
-
-    wire                                            udp_reg_req;
-    wire                                            udp_reg_rd_wr_L;
-    wire [31:0]                                     udp_reg_addr;
-    wire [31:0]                                     udp_reg_wr_data;
-    wire                                            udp_reg_ack;
-    wire [31:0]                                     udp_reg_rd_data;
-
-    wire                                            ctrl_reg_req;
-    wire                                            ctrl_reg_rd_wr_L;
-    wire [31:0]                                     ctrl_reg_addr;
-    wire [31:0]                                     ctrl_reg_wr_data;
-    wire                                            ctrl_reg_ack;
-    wire [31:0]                                     ctrl_reg_rd_data;
-
-    wire                                            report_reg_req;
-    wire                                            report_reg_rd_wr_L;
-    wire [31:0]                                     report_reg_addr;
-    wire [31:0]                                     report_reg_wr_data;
-    wire                                            report_reg_ack;
-    wire [31:0]                                     report_reg_rd_data;
-
-    wire                                            sw_rst;
-    wire                                            sw_start_report;
-    wire                                            sw_stop_report;
-    wire                                            sw_stop_report_trigger;
+    (*MARK_DEBUG="true"*)wire                                            sw_rst;
+    (*MARK_DEBUG="true"*)wire                                            sw_start_report;
+    (*MARK_DEBUG="true"*)wire                                            sw_stop_report;
+    (*MARK_DEBUG="true"*)wire                                            sw_stop_report_trigger;
 
     axi_to_reg_bus axi_to_reg_bus_inst
     (
@@ -266,7 +261,7 @@ module report
         .m_axis_tdata               (m_axis_tdata),
         .m_axis_tstrb               (m_axis_tstrb),
         .m_axis_tvalid              (m_axis_tvalid),
-        .m_axis_tready              (1'b1),
+        .m_axis_tready              (m_axis_tready),
         .m_axis_tlast               (m_axis_tlast)
     );
 

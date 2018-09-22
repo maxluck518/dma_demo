@@ -2,8 +2,8 @@
 module sdnet_top
 #(
     // Master AXI Stream Data Width
-    parameter C_M_AXIS_DATA_WIDTH=256,
-    parameter C_S_AXIS_DATA_WIDTH=256,
+    parameter C_M_AXIS_DATA_WIDTH=64,
+    parameter C_S_AXIS_DATA_WIDTH=64,
     parameter C_S_AXIS_TUSER_WIDTH=1,
     parameter TUPLE_WIDTH = 128,
     parameter PKTLEN_WIDTH= 16,
@@ -47,19 +47,19 @@ module sdnet_top
     input                                           m_axis_tready,
     output                                          m_axis_tlast,
 
-    output [PKTLEN_WIDTH-1:0]                       sdnet_tuple_out_pktlen,
-    output [ID_WIDTH-1:0]                           sdnet_tuple_out_id,
-    output                                          sdnet_tuple_out_valid
+    (*MARK_DEBUG="true"*)output [PKTLEN_WIDTH-1:0]                       sdnet_tuple_out_pktlen,
+    (*MARK_DEBUG="true"*)output [ID_WIDTH-1:0]                           sdnet_tuple_out_id,
+    (*MARK_DEBUG="true"*)output                                          sdnet_tuple_out_valid
 	
 );
 
-    wire [C_S_AXIS_DATA_WIDTH - 1:0]                sdnet_axis_tdata;
-    wire [((C_S_AXIS_DATA_WIDTH / 8)) - 1:0]        sdnet_axis_tstrb;
-    wire                                            sdnet_axis_tvalid;
-    wire                                            sdnet_axis_tready;
-    wire                                            sdnet_axis_tlast;
-    wire [TUPLE_WIDTH - 1:0]                        sdnet_tuple_in_data;
-    wire                                            sdnet_tuple_in_valid;
+    (*MARK_DEBUG="true"*)wire [C_S_AXIS_DATA_WIDTH - 1:0]                sdnet_axis_tdata;
+    (*MARK_DEBUG="true"*)wire [((C_S_AXIS_DATA_WIDTH / 8)) - 1:0]        sdnet_axis_tstrb;
+    (*MARK_DEBUG="true"*)wire                                            sdnet_axis_tvalid;
+    (*MARK_DEBUG="true"*)wire                                            sdnet_axis_tready;
+    (*MARK_DEBUG="true"*)wire                                            sdnet_axis_tlast;
+    (*MARK_DEBUG="true"*)wire [TUPLE_WIDTH - 1:0]                        sdnet_tuple_in_data;
+    (*MARK_DEBUG="true"*)wire                                            sdnet_tuple_in_valid;
 
     add_pktlen
     #(

@@ -29,9 +29,9 @@
 //----------------------------------------------------------------------------
 /*
 
- tx latency = 40 (cycles)
- min latency = 39 (cycles)
- max latency = 39 (cycles)
+ tx latency = 49 (cycles)
+ min latency = 48 (cycles)
+ max latency = 48 (cycles)
 
 input/output tuple 'control'
 	section 3-bit field @ [21:19]
@@ -83,8 +83,8 @@ input packet_in_VAL ;
 input packet_in_SOF ;
 input packet_in_EOF ;
 input packet_in_ERR ;
-input [5:0] packet_in_CNT ;
-input [255:0] packet_in_DAT ;
+input [3:0] packet_in_CNT ;
+input [63:0] packet_in_DAT ;
 input tuple_in_control_VALID ;
 input [21:0] tuple_in_control_DATA ;
 input packet_out_RDY /* unused */ ;
@@ -92,8 +92,8 @@ output packet_out_VAL ;
 output packet_out_SOF ;
 output packet_out_EOF ;
 output packet_out_ERR ;
-output [5:0] packet_out_CNT ;
-output [255:0] packet_out_DAT ;
+output [3:0] packet_out_CNT ;
+output [63:0] packet_out_DAT ;
 output tuple_out_control_VALID ;
 output [21:0] tuple_out_control_DATA ;
 output tuple_out_fields_VALID ;
@@ -106,8 +106,8 @@ wire packet_out_VAL ;
 wire packet_out_SOF ;
 wire packet_out_EOF ;
 wire packet_out_ERR ;
-wire [5:0] packet_out_CNT ;
-wire [255:0] packet_out_DAT ;
+wire [3:0] packet_out_CNT ;
+wire [63:0] packet_out_DAT ;
 wire tuple_out_control_VALID ;
 wire tuple_out_valid ;
 reg [21:0] tuple_out_control_DATA ;
@@ -173,6 +173,6 @@ OF_parser_inst
 endmodule
 
 // machine-generated file - do NOT modify by hand !
-// File created on 2018/09/22 10:38:34
+// File created on 2018/09/22 15:51:11
 // by Barista HDL generation library, version TRUNK @ 1007984
 

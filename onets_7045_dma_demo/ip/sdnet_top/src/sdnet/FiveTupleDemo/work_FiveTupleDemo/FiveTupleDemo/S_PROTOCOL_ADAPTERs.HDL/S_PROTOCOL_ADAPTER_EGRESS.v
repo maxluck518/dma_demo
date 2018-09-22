@@ -60,22 +60,22 @@ input packet_in_SOF ;
 input packet_in_EOF ;
 input packet_in_VAL ;
 output packet_in_RDY ;
-input [255:0] packet_in_DAT ;
+input [63:0] packet_in_DAT ;
 input packet_in_ERR /* unused */ ;
-input [5:0] packet_in_CNT ;
+input [3:0] packet_in_CNT ;
 output packet_out_TLAST ;
 output packet_out_TVALID ;
 input packet_out_TREADY ;
-output [255:0] packet_out_TDATA /* undriven */ ;
-output [31:0] packet_out_TKEEP /* undriven */ ;
+output [63:0] packet_out_TDATA /* undriven */ ;
+output [7:0] packet_out_TKEEP /* undriven */ ;
 
 wire packet_in_RDY ;
 reg packet_out_TLAST ;
 reg packet_out_TVALID ;
-wire [255:0] packet_out_TDATA /* undriven */ ;
-wire [31:0] packet_out_TKEEP /* undriven */ ;
-reg [255:0] packet_out_TDATA_i /* unused */ ;
-reg [31:0] packet_out_TKEEP_i /* unused */ ;
+wire [63:0] packet_out_TDATA /* undriven */ ;
+wire [7:0] packet_out_TKEEP /* undriven */ ;
+reg [63:0] packet_out_TDATA_i /* unused */ ;
+reg [7:0] packet_out_TKEEP_i /* unused */ ;
 
 always @( posedge clk_line ) begin
 	if ( rst ) begin
@@ -99,22 +99,22 @@ always @( posedge clk_line ) begin
 end
 
 always @( posedge clk_line ) begin
-	packet_out_TKEEP_i <= ( packet_in_EOF ? ~( { 32{1'd1} } >> packet_in_CNT ) : { 32{1'd1} } ) ;
+	packet_out_TKEEP_i <= ( packet_in_EOF ? ~( { 8{1'd1} } >> packet_in_CNT ) : { 8{1'd1} } ) ;
 end
 
 
 
 genvar i;
 genvar j;
-for (i=0; i<32; i=i+1) 
+for (i=0; i<8; i=i+1) 
     for (j=0; j<8; j=j+1) 
-        assign packet_out_TDATA[i*8+j] = packet_out_TDATA_i[(32-i-1)*8+j];
-for (i=0; i<32; i=i+1) assign packet_out_TKEEP[i] = packet_out_TKEEP_i[31-i];
+        assign packet_out_TDATA[i*8+j] = packet_out_TDATA_i[(8-i-1)*8+j];
+for (i=0; i<8; i=i+1) assign packet_out_TKEEP[i] = packet_out_TKEEP_i[7-i];
 
 
 endmodule
 
 // machine-generated file - do NOT modify by hand !
-// File created on 2018/09/22 10:38:34
+// File created on 2018/09/22 15:51:11
 // by Barista HDL generation library, version TRUNK @ 1007984
 
