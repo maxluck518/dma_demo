@@ -4,6 +4,10 @@ set ip_proj_part "xc7z045ffg676-2"
 
 create_project $ip_proj_name $ip_proj_root -part $ip_proj_part -force
 
+
+add_files ./ip/reg_access_fifo/reg_access_fifo.xci
+add_files ./src/common_lib/small_fifo_v3.v
+add_files ./src/common_lib/fallthrough_small_fifo_v2.v
 add_files ./src/ctrl_mem.v
 add_files ./src/ctrl_logic.v
 add_files ./src/report.v

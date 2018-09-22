@@ -7,6 +7,8 @@ create_project $ip_proj_name $ip_proj_root -part $ip_proj_part -force
 # user add : add_files
 add_files ./src/sdnet_top.v
 add_files ./src/add_pktlen.v
+add_files ./src/common_lib/small_fifo_v3.v
+add_files ./src/common_lib/fallthrough_small_fifo_v2.v
 add_files ./src/sdnet/FiveTupleDemo/work_FiveTupleDemo/FiveTupleDemo/Testbench/Check.v
 add_files ./src/sdnet/FiveTupleDemo/work_FiveTupleDemo/FiveTupleDemo/Testbench/TB_System_Stim.v
 add_files ./src/sdnet/FiveTupleDemo/work_FiveTupleDemo/FiveTupleDemo/S_RESETTER.HDL/S_RESETTER_control.v
