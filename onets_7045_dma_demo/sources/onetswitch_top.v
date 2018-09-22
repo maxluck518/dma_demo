@@ -1,5 +1,4 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
+`timescale 1ns / 1ps/////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
 // 
@@ -46,10 +45,10 @@ module onetswitch_top(
    
    input        reset,
    
-   input  [3:0] rxn,
-   input  [3:0] rxp,
-   output [3:0] txp,
-   output [3:0] txn,
+   input  [1:0] rxn,
+   input  [1:0] rxp,
+   output [1:0] txp,
+   output [1:0] txn,
    
    output [1:0] pl_led,
    output [1:0] pl_pmod   
