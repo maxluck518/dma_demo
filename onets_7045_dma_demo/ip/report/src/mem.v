@@ -3,7 +3,7 @@ module mem
     parameter FIFO_DATA_WIDTH  = 20,
 	parameter MEM_ADDR_WIDTH   = 19,
 	parameter MEM_DATA_WIDTH   = 20,
-	parameter MEM_USED_NUM     = 1000,
+	parameter MEM_USED_NUM     = 1024,
 	parameter SIM_ONLY         = 0,
     parameter TIMESTAMP_WIDTH  = 32,
     parameter TIME_WAIT_THRESH = 32'h0000ffff
