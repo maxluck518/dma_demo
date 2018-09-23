@@ -47,7 +47,7 @@ module udp_reg_path_decode (
          udp_reg_wr_data <= 31'h0;
       end
       else begin
-         casez (reg_addr[23:19])
+         casez (reg_addr[23:20])
            4'b0001: begin
               reg_ack <= ctrl_reg_ack;
               reg_rd_data <= ctrl_reg_rd_data;
