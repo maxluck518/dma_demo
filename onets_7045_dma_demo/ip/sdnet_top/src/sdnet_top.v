@@ -131,12 +131,12 @@ module sdnet_top
         .tuple_out_metadata_out_DATA            (sdnet_tuple_out_pktlen),
         .tuple_out_counter_index_out_VALID      (),
         .tuple_out_counter_index_out_DATA       (sdnet_tuple_out_id),
-        .clk_line_rst                           (axis_aclk),
-        .clk_line                               (~axis_resetn),
-        .clk_lookup_rst                         (axi_aclk),
-        .clk_lookup                             (~axi_resetn),
-        .clk_control_rst                        (axi_aclk),
-        .clk_control                            (~axi_resetn),
+        .clk_line_rst                           (~axis_resetn),
+        .clk_line                               (axis_aclk),
+        .clk_lookup_rst                         (~axi_resetn),
+        .clk_lookup                             (axi_aclk),
+        .clk_control_rst                        (~axi_resetn),
+        .clk_control                            (axi_aclk),
         .internal_rst_done                      ()
     );
 

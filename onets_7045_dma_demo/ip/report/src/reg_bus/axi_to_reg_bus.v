@@ -56,34 +56,34 @@ module axi_to_reg_bus
    //AXI-lite Slave interface
    //------------------------------//
    // Write address channel
-   wire [31:0]       awaddr;
-   wire [2:0]	      awprot;
-   wire              awvalid;
-   reg               awready;
+   (*MARK_DEBUG="true"*)wire [31:0]       awaddr;
+   (*MARK_DEBUG="true"*)wire [2:0]	      awprot;
+   (*MARK_DEBUG="true"*)wire              awvalid;
+   (*MARK_DEBUG="true"*)reg               awready;
 
    // Write Data Channel
-   wire [31:0]       wdata;
-   wire [3:0]        wstrb;
-   wire              wvalid;
-   reg               wready;
+   (*MARK_DEBUG="true"*)wire [31:0]       wdata;
+   (*MARK_DEBUG="true"*)wire [3:0]        wstrb;
+   (*MARK_DEBUG="true"*)wire              wvalid;
+   (*MARK_DEBUG="true"*)reg               wready;
 
 
    // Write Response Channel
-   reg [1:0]         bresp;
-   reg               bvalid;
-   wire              bready;
+   (*MARK_DEBUG="true"*)reg [1:0]         bresp;
+   (*MARK_DEBUG="true"*)reg               bvalid;
+   (*MARK_DEBUG="true"*)wire              bready;
 
    // Read Address channel
-   wire [31:0]       araddr;
-   wire [2:0]        arprot;
-   wire              arvalid;
-   reg               arready;
+   (*MARK_DEBUG="true"*)wire [31:0]       araddr;
+   (*MARK_DEBUG="true"*)wire [2:0]        arprot;
+   (*MARK_DEBUG="true"*)wire              arvalid;
+   (*MARK_DEBUG="true"*)reg               arready;
 
    // Read Data Channel
-   reg [31:0]        rdata;
-   reg [1:0]         rresp;
-   reg               rvalid;
-   wire              rready;
+   (*MARK_DEBUG="true"*)reg [31:0]        rdata;
+   (*MARK_DEBUG="true"*)reg [1:0]         rresp;
+   (*MARK_DEBUG="true"*)reg               rvalid;
+   (*MARK_DEBUG="true"*)wire              rready;
    
 	reg_access_fifo reg_access_fifo (
 		.m_aclk           (clk), 

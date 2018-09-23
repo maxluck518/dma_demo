@@ -96,7 +96,7 @@ module report
     axi_to_reg_bus axi_to_reg_bus_inst
     (
        
-       .reset                   (axis_aresetn),
+       .reset                   (~axis_aresetn),
        .clk                     (axis_clk),
        .s_axi_aclk              (s_axi_aclk   ),
        .s_axi_aresetn           (s_axi_aresetn),
