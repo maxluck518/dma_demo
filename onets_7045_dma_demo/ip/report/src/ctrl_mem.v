@@ -51,13 +51,13 @@ always @(posedge clk) begin
     else begin
         mem[2][0:0] <= sw_stop_report;
         if(reg_req) begin
-            if(reg_rd_wr_L) begin
+            reg_ack     <= 1;
+            if(!reg_rd_wr_L) begin
                 if(reg_addr != 2) begin
                     mem[reg_addr] <= reg_wr_data;
                 end
             end
             else begin
-                reg_ack     <= 1;
                 reg_rd_data <= mem[reg_addr];
             end
         end

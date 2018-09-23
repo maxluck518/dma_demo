@@ -46,11 +46,11 @@ always @(posedge clk) begin
     end
     else begin
         if(reg_req_1) begin
-            if(reg_rd_wr_L_1) begin
+            reg_ack_1     <= 1;
+            if(!reg_rd_wr_L_1) begin
                 mem[reg_addr_1] <= reg_wr_data_1;
             end
             else begin
-                reg_ack_1     <= 1;
                 reg_rd_data_1 <= mem[reg_addr_1];
             end
         end
@@ -67,11 +67,11 @@ always @(posedge clk) begin
     end
     else begin
         if(reg_req_2) begin
-            if(reg_rd_wr_L_2) begin
+            reg_ack_2     <= 1;
+            if(!reg_rd_wr_L_2) begin
                 mem[reg_addr_2] <= reg_wr_data_2;
             end
             else begin
-                reg_ack_2     <= 1;
                 reg_rd_data_2 <= mem[reg_addr_2];
             end
         end
