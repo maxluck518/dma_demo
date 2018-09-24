@@ -5,12 +5,25 @@ module ctrl_logic
     input                                           axis_aresetn,
 
     input                                           fifo_empty,
-    input                                           sw_start_report,
+    output                                          sw_start_report_trigger,
     input                                           sw_stop_report_trigger,
+    input                                           sw_start_report,
     output reg                                      sw_stop_report
 );
 
     reg                                             wait_empty_en;
+    reg                                             sw_start_report_pre;
+
+    assign sw_start_report_trigger = !sw_start_report_pre & sw_start_report;
+
+    always@(posedge axis_clk) begin
+        if(~axis_aresetn) begin
+            sw_start_report_pre <= 0;
+        end
+        else begin
+            sw_start_report_pre <= sw_start_report;
+        end
+    end
 
     always@(posedge axis_clk) begin
         if(~axis_aresetn) begin
@@ -20,7 +33,7 @@ module ctrl_logic
             if(wait_empty_en & fifo_empty) begin
                 sw_stop_report <= 1;
             end
-            else if(sw_start_report) begin
+            else if(sw_start_report_trigger) begin
                 sw_stop_report <= 0;
             end
         end
@@ -43,4 +56,5 @@ module ctrl_logic
             end
         end
     end
+
 endmodule
