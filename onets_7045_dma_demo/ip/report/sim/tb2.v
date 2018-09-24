@@ -19,7 +19,7 @@ module data_tb2
     wire  [FIFO_DATA_WIDTH-1:0]                     fifo_din;
     wire                                            fifo_full;
     wire                                            fifo_prog_full;		
-
+    wire                                            fifo_empty;
     // AXI Stream Ports
     wire  [C_M_AXIS_DATA_WIDTH-1:0]                 m_axis_tdata;
     wire  [((C_M_AXIS_DATA_WIDTH/8))-1:0]           m_axis_tstrb;
@@ -58,45 +58,14 @@ module data_tb2
 
     wire                                            sw_rst;
     reg                                             sw_start_report;
-    reg                                             sw_stop_report;
+    wire                                            sw_stop_report;
+    wire                                            sw_start_report_trigger;
     wire                                            sw_stop_report_trigger;
-    reg                                             wait_empty_en;
 
-    reg [15:0]  cnt;
-    localparam TIMER_THRESH = 16'hffff;
-
-    always@(posedge axis_clk) begin
-        if(~axis_aresetn) begin
-            sw_stop_report <= 0;
-        end
-        else begin
-            if(wait_empty_en & fifo_empty) begin
-                sw_stop_report <= 1;
-            end
-            else if(sw_start_report) begin
-                sw_stop_report <= 0;
-            end
-        end
-    end
-
-    always@(posedge axis_clk) begin
-        if(~axis_aresetn) begin
-            wait_empty_en <= 0;
-        end
-        else begin
-            if(wait_empty_en) begin
-                if(fifo_empty) begin
-                    wait_empty_en <= 0;
-                end
-            end
-            else begin
-                if(sw_stop_report_trigger) begin
-                    wait_empty_en <= 1;
-                end
-            end
-        end
-    end
-
+    reg [17:0]  cnt;
+    localparam TIMER_THRESH_1 = 16'hffff;
+    localparam TIMER_THRESH_2 = 17'h1ffff;
+    localparam TIMER_THRESH_3 = 18'h2ffff;
 
     always # 2.5 axis_clk = ~axis_clk;
 
@@ -117,15 +86,32 @@ module data_tb2
         end
         else begin
             cnt <= cnt + 1;
-            if(cnt == TIMER_THRESH) begin
+            if(cnt == TIMER_THRESH_1) begin
                 sw_start_report <= 1;
             end
-            else begin
+            else if(cnt == TIMER_THRESH_2) begin
                 sw_start_report <= 0;
             end
+            else if(cnt == TIMER_THRESH_3) begin
+                sw_start_report <= 1;
+            end
+//            else begin
+//                sw_start_report <= 0;
+//            end
         end
     end
 
+    ctrl_logic ctrl_logic_inst
+    (
+        .axis_clk                       (axis_clk               ),
+        .axis_aresetn                   (axis_aresetn           ),
+
+        .fifo_empty                     (fifo_empty             ),
+        .sw_start_report_trigger        (sw_start_report_trigger),
+        .sw_stop_report_trigger         (sw_stop_report_trigger ),
+        .sw_start_report                (sw_start_report        ),
+        .sw_stop_report                 (sw_stop_report         )
+    );
 
     mem mem_inst
     (
@@ -148,7 +134,7 @@ module data_tb2
         // Global Ports
         .clk                        (axis_clk),
     	.rst                        (~axis_aresetn),
-        .start_report_trigger       (sw_start_report),
+        .start_report_trigger       (sw_start_report_trigger),
         .stop_report_trigger        (sw_stop_report_trigger),
     
         .reg_req                    (report_reg_req    ),

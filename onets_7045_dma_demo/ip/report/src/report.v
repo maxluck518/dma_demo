@@ -91,6 +91,7 @@ module report
     (*MARK_DEBUG="true"*)wire                                            sw_rst;
     (*MARK_DEBUG="true"*)wire                                            sw_start_report;
     (*MARK_DEBUG="true"*)wire                                            sw_stop_report;
+    (*MARK_DEBUG="true"*)wire                                            sw_start_report_trigger;
     (*MARK_DEBUG="true"*)wire                                            sw_stop_report_trigger;
 
     axi_to_reg_bus axi_to_reg_bus_inst
@@ -166,13 +167,14 @@ module report
 
     ctrl_logic ctrl_logic_inst
     (
-        .axis_clk               (axis_clk              ),
-        .axis_aresetn           (axis_aresetn          ),
+        .axis_clk                   (axis_clk              ),
+        .axis_aresetn               (axis_aresetn          ),
 
-        .fifo_empty             (fifo_empty            ),
-        .sw_start_report        (sw_start_report       ),
-        .sw_stop_report_trigger (sw_stop_report_trigger),
-        .sw_stop_report         (sw_stop_report        )
+        .fifo_empty                 (fifo_empty            ),
+        .sw_start_report_trigger    (sw_start_report_trigger),
+        .sw_stop_report_trigger     (sw_stop_report_trigger),
+        .sw_start_report            (sw_start_report       ),
+        .sw_stop_report             (sw_stop_report        )
     );
 
     ctrl_mem ctrl_mem_inst
@@ -223,7 +225,7 @@ module report
         // Global Ports
         .clk                        (axis_clk),
     	.rst                        (~axis_aresetn),
-        .start_report_trigger       (sw_start_report),
+        .start_report_trigger       (sw_start_report_trigger),
         .stop_report_trigger        (sw_stop_report_trigger),
     
         .reg_req                    (report_reg_req    ),

@@ -34,7 +34,7 @@ reg [TIMESTAMP_WIDTH-1:0]           cnt;
 
 // trigger
 always@(posedge clk) begin
-    reg_rd_wr_L <= 0;
+    reg_rd_wr_L <= 1;
 
     if(rst) begin
         report_en <= 0;
