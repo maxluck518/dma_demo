@@ -75,8 +75,16 @@ set tx_ifg_delay [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 tx
 set_property -dict [list CONFIG.CONST_WIDTH {8} CONFIG.CONST_VAL {0}] [get_bd_cells tx_ifg_delay]
 
 # Create instance: user_ip, and set properties
-set sdnet_top                  [ create_bd_cell -type ip -vlnv xilinx.com:user:sdnet_top:1.0 sdnet_top ]
-set pkt_report                  [ create_bd_cell -type ip -vlnv xilinx.com:user:report:1.0 pkt_report ]
+set sdnet_top [ create_bd_cell -type ip -vlnv xilinx.com:user:sdnet_top:1.0 sdnet_top ]
+set pkt_report [ create_bd_cell -type ip -vlnv xilinx.com:user:report:1.0 pkt_report ]
+set dma_eth [ create_bd_cell -type ip -vlnv xilinx.com:user:dma_eth:1.0 dma_eth ]
+
+# Create instance: bram, and set properties
+set bram [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 bram ]
+set_property -dict [list CONFIG.Memory_Type {True_Dual_Port_RAM} CONFIG.Enable_32bit_Address {true} CONFIG.Use_Byte_Write_Enable {true} CONFIG.Byte_Size {8} CONFIG.Enable_B {Use_ENB_Pin} CONFIG.Register_PortA_Output_of_Memory_Primitives {false} CONFIG.Use_RSTA_Pin {true} CONFIG.Use_RSTB_Pin {true} CONFIG.Port_B_Clock {100} CONFIG.Port_B_Write_Rate {50} CONFIG.Port_B_Enable_Rate {100} CONFIG.use_bram_block {BRAM_Controller} CONFIG.EN_SAFETY_CKT {true}] [get_bd_cells bram]
+
+# Create instance: axi_bram_controller, and set properties
+set axi_bram_ctrl [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_bram_ctrl:4.0 axi_bram_ctrl ]
 
 # 10g ethernet connection
 connect_bd_net [ get_bd_ports refclk_p]                        [ get_bd_pins axi_10g_ethernet_0/refclk_p]
@@ -220,13 +228,19 @@ connect_bd_net [get_bd_pins processing_system7_0/IRQ_F2P] [get_bd_pins xlconcat_
 connect_bd_net [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/FCLK_CLK1]
 connect_bd_net [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins axi_10g_ethernet_0/coreclk_out]
 
+# dma_eth connection
+connect_bd_intf_net [get_bd_intf_pins axi_dma_0/M_AXIS_MM2S] [get_bd_intf_pins dma_eth/s_axis_rxd_1]
+connect_bd_intf_net [get_bd_intf_pins axi_10g_ethernet_0/m_axis_rx] [get_bd_intf_pins dma_eth/s_axis_rxd_0]
+connect_bd_intf_net [get_bd_intf_pins dma_eth/m_axis_txd_0] [get_bd_intf_pins sdnet_top/s_axis]
+connect_bd_net [get_bd_pins dma_eth/s_axis_rxd_aclk] [get_bd_pins axi_10g_ethernet_0/coreclk_out]
+connect_bd_net [get_bd_pins dma_eth/s_axis_rxd_aresetn] [get_bd_pins rst_ps7_0_156M/peripheral_aresetn]
+
 # sdnet_top connection
 connect_bd_net [get_bd_pins sdnet_top/axi_aclk] [get_bd_pins processing_system7_0/FCLK_CLK1]
 connect_bd_net [get_bd_pins sdnet_top/axi_resetn] [get_bd_pins rst_ps7_0_75M/peripheral_aresetn]
 connect_bd_net [get_bd_pins sdnet_top/axis_resetn] [get_bd_pins rst_ps7_0_156M/peripheral_aresetn]
 connect_bd_net [get_bd_pins sdnet_top/axis_aclk] [get_bd_pins axi_10g_ethernet_0/coreclk_out]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins axi_ic_gp/M08_AXI] [get_bd_intf_pins sdnet_top/s_axi]
-connect_bd_intf_net [get_bd_intf_pins axi_10g_ethernet_0/m_axis_rx] [get_bd_intf_pins sdnet_top/s_axis]
 connect_bd_intf_net [get_bd_intf_pins sdnet_top/m_axis] [get_bd_intf_pins axi_10g_ethernet_1/s_axis_tx]
 connect_bd_intf_net [get_bd_intf_pins axi_10g_ethernet_1/m_axis_rx] [get_bd_intf_pins axi_10g_ethernet_0/s_axis_tx]
 
@@ -238,6 +252,13 @@ connect_bd_net [get_bd_pins pkt_report/axis_clk] [get_bd_pins axi_10g_ethernet_0
 connect_bd_intf_net [get_bd_intf_pins pkt_report/s_axi] -boundary_type upper [get_bd_intf_pins axi_ic_gp/M09_AXI]
 connect_bd_intf_net [get_bd_intf_pins pkt_report/m_axis] [get_bd_intf_pins axi_dma_0/S_AXIS_S2MM]
 
+# bram connection
+connect_bd_intf_net [get_bd_intf_pins axi_bram_ctrl/BRAM_PORTA] [get_bd_intf_pins bram/BRAM_PORTA]
+connect_bd_intf_net [get_bd_intf_pins axi_bram_ctrl/BRAM_PORTB] [get_bd_intf_pins bram/BRAM_PORTB]
+connect_bd_net [get_bd_pins axi_bram_ctrl/s_axi_aclk] [get_bd_pins processing_system7_0/FCLK_CLK1]
+connect_bd_net [get_bd_pins axi_bram_ctrl/s_axi_aresetn] [get_bd_pins rst_ps7_0_75M/peripheral_aresetn]
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins axi_ic_gp/M07_AXI] [get_bd_intf_pins axi_bram_ctrl/S_AXI]
+
 # Create address segments
 create_bd_addr_seg -range 0x40000000 -offset 0x0 [get_bd_addr_spaces axi_dma_0/Data_SG] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
 create_bd_addr_seg -range 0x40000000 -offset 0x0 [get_bd_addr_spaces axi_dma_0/Data_MM2S] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
@@ -247,5 +268,6 @@ create_bd_addr_seg -range 0x10000 -offset 0x40400000 [get_bd_addr_spaces process
 create_bd_addr_seg -range 0x40000 -offset 0x43C00000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_10g_ethernet_0/s_axi/REG0] SEG_eth_buf_REG
 create_bd_addr_seg -range 0x10000 -offset 0x43C40000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_10g_ethernet_1/s_axi/REG0] SEG_eth_buf_REG2
 create_bd_addr_seg -range 0x10000 -offset 0x44000000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs sdnet_top/s_axi/REG0] SEG_eth_buf_REG4
-create_bd_addr_seg -range 0x8000000 -offset 0x48000000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs pkt_report/s_axi/REG0] SEG_eth_buf_REG6
+create_bd_addr_seg -range 0x10000 -offset 0x45000000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_bram_ctrl/S_AXI/MEM0] SEG_eth_buf_REG6
+create_bd_addr_seg -range 0x8000000 -offset 0x48000000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs pkt_report/s_axi/REG0] SEG_eth_buf_REG8
 save_bd_design

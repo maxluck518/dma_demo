@@ -21,6 +21,7 @@ set proj_iprepo_dir  "$proj_root/ip-repo"
 set ip_list [list \
    "report" \
    "sdnet_top" \
+   "dma_eth" \
    ]
 
 set source_files [list \
