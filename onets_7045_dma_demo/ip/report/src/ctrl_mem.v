@@ -1,6 +1,6 @@
 module ctrl_mem
 #(
-	parameter MEM_ADDR_WIDTH   = 19,
+	parameter MEM_ADDR_WIDTH   = 4,
 	parameter MEM_DATA_WIDTH   = 32,
 	parameter MEM_USED_NUM     = 10,
 	parameter SIM_ONLY         = 0

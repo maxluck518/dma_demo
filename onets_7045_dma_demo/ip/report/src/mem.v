@@ -1,7 +1,7 @@
 module mem
 #(
     parameter FIFO_DATA_WIDTH  = 20,
-	parameter MEM_ADDR_WIDTH   = 19,
+	parameter MEM_ADDR_WIDTH   = 10,
 	parameter MEM_DATA_WIDTH   = 20,
 	parameter MEM_USED_NUM     = 1024,
 	parameter SIM_ONLY         = 0,
