@@ -19,8 +19,8 @@ set proj_constr_dir  "$proj_root/$proj_name/constrs"
 set proj_iprepo_dir  "$proj_root/ip-repo"
 
 set ip_list [list \
-   "report" \
-   "sdnet_top" \
+    "report" \
+    "sdnet_top" \
    ]
 
 set source_files [list \

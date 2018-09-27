@@ -107,17 +107,7 @@ module onetswitch_top(
       .bd_fclk0_125m                         (bd_fclk0_125m),
       .bd_fclk1_75m                          (bd_fclk1_75m ),
       .bd_fclk2_200m                         (bd_fclk2_200m),
-      .ext_reset_in                          (reset),
-      .refclk_n                              (refclk_n),
-      .refclk_p                              (refclk_p),
-      .rxn_0                                 (rxn[0]),
-      .rxn_1                                 (rxn[1]),
-      .rxp_0                                 (rxp[0]),
-      .rxp_1                                 (rxp[1]),
-      .txn_0                                 (txn[0]),
-      .txn_1                                 (txn[1]),
-      .txp_0                                 (txp[0]),
-      .txp_1                                 (txp[1])
+      .ext_reset_in                          (reset)
    );
     
 endmodule
