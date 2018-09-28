@@ -65,7 +65,7 @@ always@(posedge clk) begin
                 mem_report_addr     <= 0;
                 stop_report_trigger <= 1;
             end
-            else if(~fifo_prog_full) begin
+            else if(~fifo_prog_full & ~stop_report_trigger) begin
                 reg_req             <= 1;
                 reg_addr            <= mem_report_addr;
                 mem_report_addr     <= mem_report_addr + 1;

@@ -74,34 +74,20 @@ module fifo_to_axis
 );
 
 localparam IDLE   = 0;
-localparam FILL_1 = 1;
-localparam FILL_2 = 2;
-localparam FILL_3 = 3;
+localparam FILL   = 1;
 
 // -- Signals
 
 (*MARK_DEBUG="true"*)reg [2:0]            state;
 reg [2:0]                                 state_next;
-(*MARK_DEBUG="true"*)reg [4:0]            cnt;
-reg [4:0]                                 cnt_next;
 
 reg                                       fifo_rd_en;
 wire   [FIFO_DATA_WIDTH-1:0]              fifo_dout;
 
-reg [24-1:0]                              tmp_data_1;
-reg [24-1:0]                              tmp_data_2;
-reg [24/8-1:0]                            tmp_strb_1;
-reg [24/8-1:0]                            tmp_strb_2;
-
-reg [24-1:0]                              fill_1_data;
-reg [24-1:0]                              fill_1_data_next;
-reg [24/8-1:0]                            fill_1_strb;
-reg [24/8-1:0]                            fill_1_strb_next;
-
-wire [C_M_AXIS_DATA_WIDTH-1:0]            m_axis_tdata_t;
-wire [((C_M_AXIS_DATA_WIDTH/8))-1:0]      m_axis_tstrb_t;
-reg                                       m_axis_tvalid_t;
-reg                                       m_axis_tlast_t;
+reg [C_M_AXIS_DATA_WIDTH-1:0]             m_axis_tdata_next;
+reg [((C_M_AXIS_DATA_WIDTH/8))-1:0]       m_axis_tstrb_next;
+reg                                       m_axis_tvalid_next;
+reg                                       m_axis_tlast_next;
 
 // fifo write plane
 
@@ -126,92 +112,63 @@ fallthrough_small_fifo_v2
 );
 
 // fifo read plane
-
-always@(posedge axis_clk) begin
-    if(~axis_aresetn) begin
-        m_axis_tdata  <= 0;
-        m_axis_tstrb  <= 0;
-        m_axis_tlast  <= 0;
-        m_axis_tvalid <= 0;
-    end
-    else begin
-        m_axis_tdata  <= m_axis_tdata_t;
-        m_axis_tstrb  <= m_axis_tstrb_t;
-        m_axis_tlast  <= m_axis_tlast_t;
-        m_axis_tvalid <= m_axis_tvalid_t;
-    end
-end
-
-assign m_axis_tdata_t = {16'h0000,tmp_data_2,tmp_data_1};
-assign m_axis_tstrb_t = {2'b00,tmp_strb_2,tmp_strb_1};
-
 always@(*) begin
     state_next = state;
-    cnt_next = cnt;
+    m_axis_tdata_next = m_axis_tdata;
+    m_axis_tstrb_next = m_axis_tstrb;
+    m_axis_tlast_next = m_axis_tlast;
+    m_axis_tvalid_next = 0;
     fifo_rd_en = 0;
-    tmp_data_1 = 0;
-    tmp_data_2 = 0;
-    tmp_strb_1 = 0;
-    tmp_strb_2 = 0;
-    fill_1_data_next = fill_1_data;
-    fill_1_strb_next = fill_1_strb;
-    m_axis_tvalid_t = 0;
-    m_axis_tlast_t = 0;
-    case(state)
+    case(state) 
         IDLE: begin
             if(m_axis_tready & ~fifo_empty) begin
-                state_next = FILL_2;
-                tmp_data_1 = {4'b0000,fifo_dout};
-                tmp_strb_1 = 3'b111;
-            end
-        end
-        FILL_1: begin
-            fill_1_data_next = {4'b0000,fifo_dout};
-            fill_1_strb_next = 3'b111;
-            if(m_axis_tready & ~fifo_empty) begin
-                state_next = FILL_2;
+                state_next = FILL;
+                m_axis_tdata_next = fifo_dout;
+                m_axis_tstrb_next = 8'hff;
+                m_axis_tlast_next = 0;
+                m_axis_tvalid_next = 1;
                 fifo_rd_en = 1;
             end
         end
-        FILL_2: begin
-            tmp_data_1 = fill_1_data;
-            tmp_strb_1 = fill_1_strb;
-            tmp_data_2 = {4'b0000,fifo_dout};
-            tmp_strb_2 = 3'b111;
-            m_axis_tvalid_t = 1;
-            if(m_axis_tready & ~fifo_empty) begin
-                state_next = FILL_1;
-                fifo_rd_en = 1;
+        FILL: begin
+            if(m_axis_tready) begin
+                if(fifo_empty) begin
+                    state_next = IDLE;
+                    m_axis_tdata_next = fifo_dout;
+                    m_axis_tstrb_next = 8'hff;
+                    m_axis_tlast_next = 1;
+                    m_axis_tvalid_next = 1;
+                    fifo_rd_en = 0;
+                end
+                else begin
+                    m_axis_tdata_next = fifo_dout;
+                    m_axis_tstrb_next = 8'hff;
+                    m_axis_tlast_next = 0;
+                    m_axis_tvalid_next = 1;
+                    fifo_rd_en = 1;
+                end
             end
             else begin
-                state_next = IDLE;
                 fifo_rd_en = 0;
-            end
-
-            if(cnt == 4'h9) begin
-                cnt_next = 0;
-                m_axis_tlast_t = 1;
-            end
-            else begin
-                cnt_next = cnt + 1;
             end
         end
     endcase
 end
-
 always@(posedge axis_clk) begin
     if(~axis_aresetn) begin
-        fill_1_data <= 0;
-        fill_1_strb <= 0;
-        state       <= IDLE;
-        cnt         <= 0;
+        state <= 0;
+        m_axis_tdata <= 0;
+        m_axis_tstrb <= 0;
+        m_axis_tlast <= 0;
+        m_axis_tvalid <= 0;
     end
     else begin
-        fill_1_data <= fill_1_data_next;
-        fill_1_strb <= fill_1_strb_next;
         state <= state_next;
-        cnt   <= cnt_next;
+        m_axis_tdata <= m_axis_tdata_next;
+        m_axis_tstrb <= m_axis_tstrb_next;
+        m_axis_tlast <= m_axis_tlast_next;
+        m_axis_tvalid <= m_axis_tvalid_next;
     end
 end
-	
+
 endmodule
