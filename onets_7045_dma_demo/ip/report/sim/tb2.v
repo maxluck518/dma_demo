@@ -22,7 +22,7 @@ module data_tb2
     wire                                            fifo_empty;
     // AXI Stream Ports
     wire  [C_M_AXIS_DATA_WIDTH-1:0]                 m_axis_tdata;
-    wire  [((C_M_AXIS_DATA_WIDTH/8))-1:0]           m_axis_tstrb;
+    wire  [((C_M_AXIS_DATA_WIDTH/8))-1:0]           m_axis_tkeep;
     wire  [C_M_AXIS_TUSER_WIDTH-1:0]                m_axis_tuser;
     wire                                            m_axis_tvalid;
     wire                                            m_axis_tready;
@@ -170,7 +170,7 @@ module data_tb2
         .fifo_empty                 (fifo_empty),
     
         .m_axis_tdata               (m_axis_tdata),
-        .m_axis_tstrb               (m_axis_tstrb),
+        .m_axis_tstrb               (m_axis_tkeep),
         .m_axis_tvalid              (m_axis_tvalid),
         .m_axis_tready              (1'b1),
         .m_axis_tlast               (m_axis_tlast)

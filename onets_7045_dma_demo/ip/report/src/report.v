@@ -50,7 +50,7 @@ module report
 
     // AXI Stream Ports
     (*MARK_DEBUG="true"*)output  [C_M_AXIS_DATA_WIDTH-1:0]               m_axis_tdata,
-    (*MARK_DEBUG="true"*)output  [((C_M_AXIS_DATA_WIDTH/8))-1:0]         m_axis_tstrb,
+    (*MARK_DEBUG="true"*)output  [((C_M_AXIS_DATA_WIDTH/8))-1:0]         m_axis_tkeep,
     (*MARK_DEBUG="true"*)output                                          m_axis_tvalid,
     (*MARK_DEBUG="true"*)input                                           m_axis_tready,
     (*MARK_DEBUG="true"*)output                                          m_axis_tlast
@@ -261,7 +261,7 @@ module report
         .fifo_empty                 (fifo_empty),
     
         .m_axis_tdata               (m_axis_tdata),
-        .m_axis_tstrb               (m_axis_tstrb),
+        .m_axis_tstrb               (m_axis_tkeep),
         .m_axis_tvalid              (m_axis_tvalid),
         .m_axis_tready              (m_axis_tready),
         .m_axis_tlast               (m_axis_tlast)
