@@ -11,8 +11,8 @@ module ctrl_logic
     output reg                                      sw_stop_report
 );
 
-    reg                                             wait_empty_en;
-    reg                                             sw_start_report_pre;
+    (*MARK_DEBUG="true"*)reg                        wait_empty_en;
+    (*MARK_DEBUG="true"*)reg                        sw_start_report_pre;
 
     assign sw_start_report_trigger = !sw_start_report_pre & sw_start_report;
 

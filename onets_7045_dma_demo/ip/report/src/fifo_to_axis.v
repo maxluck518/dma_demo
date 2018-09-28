@@ -80,9 +80,9 @@ localparam FILL_3 = 3;
 
 // -- Signals
 
-reg [2:0]                                 state;
+(*MARK_DEBUG="true"*)reg [2:0]            state;
 reg [2:0]                                 state_next;
-reg [4:0]                                 cnt;
+(*MARK_DEBUG="true"*)reg [4:0]            cnt;
 reg [4:0]                                 cnt_next;
 
 reg                                       fifo_rd_en;
