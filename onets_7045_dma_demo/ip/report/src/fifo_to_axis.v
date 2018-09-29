@@ -84,10 +84,10 @@ reg [2:0]                                 state_next;
 reg                                       fifo_rd_en;
 wire   [FIFO_DATA_WIDTH-1:0]              fifo_dout;
 
-reg [C_M_AXIS_DATA_WIDTH-1:0]             m_axis_tdata_next;
-reg [((C_M_AXIS_DATA_WIDTH/8))-1:0]       m_axis_tstrb_next;
-reg                                       m_axis_tvalid_next;
-reg                                       m_axis_tlast_next;
+reg [C_M_AXIS_DATA_WIDTH-1:0]             m_axis_tdata_prev;
+reg [((C_M_AXIS_DATA_WIDTH/8))-1:0]       m_axis_tstrb_prev;
+reg                                       m_axis_tvalid_prev;
+reg                                       m_axis_tlast_prev;
 
 // fifo write plane
 
@@ -114,19 +114,20 @@ fallthrough_small_fifo_v2
 // fifo read plane
 always@(*) begin
     state_next = state;
-    m_axis_tdata_next = m_axis_tdata;
-    m_axis_tstrb_next = m_axis_tstrb;
-    m_axis_tlast_next = m_axis_tlast;
-    m_axis_tvalid_next = 0;
+    m_axis_tdata = m_axis_tdata_prev;
+    m_axis_tstrb = m_axis_tstrb_prev;
+    m_axis_tlast = m_axis_tlast_prev;
+    m_axis_tvalid = m_axis_tvalid_prev;
     fifo_rd_en = 0;
     case(state) 
         IDLE: begin
+            m_axis_tvalid = 0;
             if(m_axis_tready & ~fifo_empty) begin
                 state_next = FILL;
-                m_axis_tdata_next = fifo_dout;
-                m_axis_tstrb_next = 8'hff;
-                m_axis_tlast_next = 0;
-                m_axis_tvalid_next = 1;
+                m_axis_tdata = fifo_dout;
+                m_axis_tstrb = 8'hff;
+                m_axis_tlast = 0;
+                m_axis_tvalid = 1;
                 fifo_rd_en = 1;
             end
         end
@@ -134,17 +135,17 @@ always@(*) begin
             if(m_axis_tready) begin
                 if(fifo_empty) begin
                     state_next = IDLE;
-                    m_axis_tdata_next = fifo_dout;
-                    m_axis_tstrb_next = 8'hff;
-                    m_axis_tlast_next = 1;
-                    m_axis_tvalid_next = 1;
+                    m_axis_tdata = fifo_dout;
+                    m_axis_tstrb = 8'hff;
+                    m_axis_tlast = 1;
+                    m_axis_tvalid = 1;
                     fifo_rd_en = 0;
                 end
                 else begin
-                    m_axis_tdata_next = fifo_dout;
-                    m_axis_tstrb_next = 8'hff;
-                    m_axis_tlast_next = 0;
-                    m_axis_tvalid_next = 1;
+                    m_axis_tdata = fifo_dout;
+                    m_axis_tstrb = 8'hff;
+                    m_axis_tlast = 0;
+                    m_axis_tvalid = 1;
                     fifo_rd_en = 1;
                 end
             end
@@ -157,17 +158,17 @@ end
 always@(posedge axis_clk) begin
     if(~axis_aresetn) begin
         state <= 0;
-        m_axis_tdata <= 0;
-        m_axis_tstrb <= 0;
-        m_axis_tlast <= 0;
-        m_axis_tvalid <= 0;
+        m_axis_tdata_prev <= 0;
+        m_axis_tstrb_prev <= 0;
+        m_axis_tlast_prev <= 0;
+        m_axis_tvalid_prev <= 0;
     end
     else begin
         state <= state_next;
-        m_axis_tdata <= m_axis_tdata_next;
-        m_axis_tstrb <= m_axis_tstrb_next;
-        m_axis_tlast <= m_axis_tlast_next;
-        m_axis_tvalid <= m_axis_tvalid_next;
+        m_axis_tdata_prev <= m_axis_tdata;
+        m_axis_tstrb_prev <= m_axis_tstrb;
+        m_axis_tlast_prev <= m_axis_tlast;
+        m_axis_tvalid_prev <= m_axis_tvalid;
     end
 end
 
